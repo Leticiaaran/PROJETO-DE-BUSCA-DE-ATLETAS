@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<script>
+  // Array de atletas (base de dados inicial)
+  const atletas = [
+    {
+      nome: "Marta",
+      esporte: "Futebol",
+      equipe: "Orlando Pride",
+      foto: "marta.jpg",
+      perfil: "marta-perfil.html"
+    },
+    {
+      nome: "Neymar Jr.",
+      esporte: "Futebol",
+      equipe: "Paris Saint-Germain",
+      foto: "neymar.jpg",
+      perfil: "neymar-perfil.html"
+    }
+  ];
+
+  // Função para exibir os resultados da pesquisa (simplificada)
+  function exibirResultados(resultados) {
+    const resultList = document.getElementById('resultList');
+    resultList.innerHTML = ''; // Limpa a lista antes de adicionar novos itens
+
+    resultados.forEach(atleta => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <img src="${atleta.foto}" alt="Foto de ${atleta.nome}">
+        <h2>${atleta.nome}</h2>
+        <p>${atleta.esporte}</p>
+        <p>${atleta.equipe}</p>
+        <a href="${atleta.perfil}">Ver perfil</a>
+      `;
+      resultList.appendChild(li);
+    });
+  }
+
+  // Função de pesquisa (simplificada)
+  function pesquisar() {
+    const termoPesquisa = document.getElementById('searchInput').value.toLowerCase();
+    const resultados = atletas.filter(atleta => atleta.nome.toLowerCase().includes(termoPesquisa));
+    exibirResultados(resultados);
+  }
+
+  // Associar a função de pesquisa ao evento de clique do botão
+  const botaoPesquisar = document.querySelector('button');
+  botaoPesquisar.addEventListener('click', pesquisar);
+
+  // Exibir todos os atletas inicialmente (opcional)
+  exibirResultados(atletas);
+</script>
+</html>
